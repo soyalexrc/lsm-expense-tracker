@@ -8,15 +8,14 @@ import {
 } from "@/lib/interfaces/expense";
 // @ts-expect-error No se encuentra el modulo
 import {FullTagDescription} from "@reduxjs/toolkit/dist/query/endpointDefinitions";
-const BASE_URL = 'http://localhost:3000/'
 
 export const expensesApi = createApi({
     reducerPath: 'expenseApi',
-    baseQuery: fetchBaseQuery({baseUrl: BASE_URL}),
+    baseQuery: fetchBaseQuery({baseUrl: process.env.HOST}),
     endpoints: (builder) => ({
         getExpensesByUserId: builder.query<Expense[], GetByUserIdWithFilters>({
             query: (body: GetByUserIdWithFilters) => ({
-                url: 'api/expense/findByUserId',
+                url: '/api/expense/findByUserId',
                 method: 'POST',
                 body
             }),
@@ -40,7 +39,7 @@ export const expensesApi = createApi({
         }),
         updateExpense: builder.mutation<UpdateExpense, Partial<UpdateExpense>>({
             query: (body) => ({
-                url: `expense/${body.id}`,
+                url: `/api/expense/${body.id}`,
                 method: 'PATCH',
                 body
             }),
@@ -48,7 +47,7 @@ export const expensesApi = createApi({
         }),
         deleteExpense: builder.mutation<UpdateExpense, string>({
             query: (id) => ({
-                url: `expense/${id}`,
+                url: `/api/expense/${id}`,
                 method: 'DELETE'
             }),
             invalidatesTags: [{ type: 'Expenses' as never, id: 'LIST' }, { type: 'Totals' as never}],
