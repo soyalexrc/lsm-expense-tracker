@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import expensesReducer from '@/lib/store/features/expenses/expensesSlice.ts'
-import {expensesApi} from "@/lib/store/services/expenses.ts";
+import expensesReducer from '@/lib/store/features/expenses/expensesSlice'
+import {expensesApi} from "@/lib/store/services/expenses";
 import {setupListeners} from "@reduxjs/toolkit/query";
-import {categoriesApi} from "@/lib/store/services/categories.ts";
-import {userSettingsApi} from "@/lib/store/services/userSettings.ts";
+import {categoriesApi} from "@/lib/store/services/categories";
+import {userSettingsApi} from "@/lib/store/services/userSettings";
 
 export const store = configureStore({
     reducer: {
