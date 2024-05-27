@@ -1,5 +1,5 @@
 import {LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
-import {TotalAmountByPaymentMethod} from "@/common/interfaces/expense.ts";
+import {TotalAmountByPaymentMethod} from "@/lib/interfaces/expense";
 
 interface Props {
     data: TotalAmountByPaymentMethod[],
