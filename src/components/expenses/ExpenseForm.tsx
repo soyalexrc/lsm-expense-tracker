@@ -129,9 +129,7 @@ export default function ExpenseForm({data}: Props) {
                 <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                         <DialogTitle>{data._id == 'null' ? 'New Expense' : 'Edit Expense'}</DialogTitle>
-                        <DialogDescription>
-                            Make changes to your profile here. Click save when you're done.
-                        </DialogDescription>
+                        <DialogDescription>Make changes to your profile here. Click save when you&apos;re done.</DialogDescription>
                     </DialogHeader>
                     <>
                         {categoriesError && (
@@ -337,7 +335,7 @@ export default function ExpenseForm({data}: Props) {
                 <DrawerHeader>
                     <DrawerTitle>{data._id == 'null' ? 'New Expense' : 'Edit Expense'}</DrawerTitle>
                     <DrawerDescription>
-                        Make changes to your profile here. Click save when you're done.
+                        Make changes to your profile here. Click save when you&apos;re done.
                     </DrawerDescription>
                 </DrawerHeader>
                 <>
