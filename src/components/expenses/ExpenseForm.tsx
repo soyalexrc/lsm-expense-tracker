@@ -64,7 +64,7 @@ export default function ExpenseForm({data}: Props) {
     const [width] = useSize()
 
     const {data: categories, isLoading: categoriesLoading, error: categoriesError} = useGetAllCategoriesQuery();
-    const {error: usError, data: usData, isLoading: usLoading} = useGetUserSettingsByUserIdQuery({userId: userId!})
+    const {error: usError, data: usData, isLoading: usLoading} = useGetUserSettingsByUserIdQuery();
 
     const [addExpense, {  isSuccess }] = useAddExpenseMutation();
     const [updateExpense, { isSuccess: uSuccess }] = useUpdateExpenseMutation()
