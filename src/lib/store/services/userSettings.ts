@@ -6,12 +6,8 @@ export const userSettingsApi = createApi({
     reducerPath: 'userSettingsApi',
     baseQuery: fetchBaseQuery({baseUrl: BASE_URL}),
     endpoints: (builder) => ({
-        getUserSettingsByUserId: builder.query<UserSettings, { userId: string }>({
-            query: (body: { userId: string }) => ({
-                method: "POST",
-                url: 'user-settings/findByUserId',
-                body: body
-            })
+        getUserSettingsByUserId: builder.query<UserSettings, void>({
+            query: () => 'user-settings/findByUserId'
         })
     })
 })

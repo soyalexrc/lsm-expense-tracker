@@ -25,12 +25,12 @@ const links: LinkType[] = [
     },
     {
         title: 'Expenses',
-        route: '/expenses',
+        route: '/dashboard/expenses',
         icon: <HandCoins className="h-4 w-4"/>
     },
     {
         title: 'Settings',
-        route: '/settings',
+        route: '/dashboard/settings',
         icon: <Settings className="h-4 w-4"/>
     },
 ]
@@ -146,7 +146,7 @@ export default function DashboardLayout({children}: Readonly<{ children: React.R
                             <UserButton/>
                         </SignedIn>
                     </header>
-                    <main className="p-4 lg:p-6 overflow-y-auto h-screen">
+                    <main className="p-4 lg:p-6  h-screen">
                         {children}
                     </main>
                 </div>

@@ -53,9 +53,9 @@ export const expensesApi = createApi({
             }),
             invalidatesTags: [{ type: 'Expenses' as never, id: 'LIST' }, { type: 'Totals' as never}],
         }),
-        getTotals: builder.query<GetTotalsResult, { userId: string, dateFrom: string; dateTo: string }> ({
+        getTotals: builder.query<GetTotalsResult, { dateFrom: string; dateTo: string }> ({
             query: (body) => ({
-                url: 'expense/GetTotals',
+                url: 'api/expense/getTotals',
                 method: 'POST',
                 body
             }),

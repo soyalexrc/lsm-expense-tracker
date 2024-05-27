@@ -54,7 +54,6 @@ export interface TotalAmountByPaymentMethod {
 
 export interface GetByUserIdWithFilters {
     title?: string,
-    userId: string,
     dateFrom?: string,
     dateTo?: string,
     categoryId?: string,
