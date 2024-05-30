@@ -5,8 +5,8 @@ import {auth} from "@clerk/nextjs/server";
 
 
 export async function POST(req: NextRequest) {
-    // console.log(userId);
-    const {dateFrom, dateTo, categoryId, paymentMethod, title, userId} = await req.json();
+    const { userId } = auth();
+    const {dateFrom, dateTo, categoryId, paymentMethod, title} = await req.json();
     const query: any = { userId: userId };
 
     // Add filters based on provided values

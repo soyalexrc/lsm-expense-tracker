@@ -29,7 +29,6 @@ export default function ExpensesPage() {
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const { data, isLoading, error } = useGetExpensesByUserIdQuery({
         title,
-        userId: userId!,
         categoryId: category,
         paymentMethod,
         dateFrom: date?.from ? date.from.toDateString() : '',
