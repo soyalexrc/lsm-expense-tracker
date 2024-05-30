@@ -22,12 +22,14 @@ import {Input} from "@/components/ui/input";
 import {Search} from "lucide-react";
 
 export default function ExpensesPage() {
+    const {userId} = useAuth();
     const [date, setDate] = useState<DateRange | undefined>(undefined)
     const [title, setTitle] = useState<string>('');
     const [category, setCategory] = useState<string>('');
     const [paymentMethod, setPaymentMethod] = useState<string>('');
     const { data, isLoading, error } = useGetExpensesByUserIdQuery({
         title,
+        userId: userId!,
         categoryId: category,
         paymentMethod,
         dateFrom: date?.from ? date.from.toDateString() : '',
