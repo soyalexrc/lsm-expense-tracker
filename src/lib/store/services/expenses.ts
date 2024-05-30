@@ -31,7 +31,7 @@ export const expensesApi = createApi({
         }),
         addExpense: builder.mutation<CreateExpense, Partial<CreateExpense>>({
             query: (body) => ({
-                url: 'expense',
+                url: '/api/expense',
                 method: 'POST',
                 body
             }),
@@ -54,7 +54,7 @@ export const expensesApi = createApi({
         }),
         getTotals: builder.query<GetTotalsResult, { dateFrom: string; dateTo: string }> ({
             query: (body) => ({
-                url: 'api/expense/getTotals',
+                url: '/api/expense/getTotals',
                 method: 'POST',
                 body
             }),

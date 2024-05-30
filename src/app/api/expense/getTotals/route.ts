@@ -1,12 +1,12 @@
 import connect from "@/lib/db";
 import Expense from "@/lib/db/models/expense";
 import {NextRequest, NextResponse} from "next/server";
-import {getAuth} from "@clerk/nextjs/server";
+import {auth} from "@clerk/nextjs/server";
 import UserSettings from "@/lib/db/models/user-settings";
 
 
 export async function POST(req: NextRequest) {
-    const { userId } = getAuth(req);
+    const { userId } = auth();
     const {dateFrom, dateTo} = await req.json();
 
     const match =
