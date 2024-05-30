@@ -39,7 +39,16 @@ export default function ExpensesPage() {
 
     if (isLoading) return 'Loading...'
 
-    if (error) return 'An error has ocurred'
+    if (error) return (
+        <div>
+            <p>An error has ocurred</p>
+            <pre>
+                {
+                    JSON.stringify(error, null, 2)
+                }
+            </pre>
+        </div>
+    )
 
     return (
         <div>
