@@ -59,7 +59,6 @@ interface Props {
 }
 
 export default function ExpenseForm({data}: Props) {
-    const {userId} = useAuth();
     const [open, setOpen] = useState(false)
     const [width] = useSize()
 
@@ -76,7 +75,6 @@ export default function ExpenseForm({data}: Props) {
         const payload = {
             ...values,
             amount: Number(values.amount),
-            userId
         }
         try {
             if (data._id !== 'null') {

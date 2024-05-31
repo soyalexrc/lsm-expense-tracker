@@ -11,6 +11,7 @@ import {FullTagDescription} from "@reduxjs/toolkit/dist/query/endpointDefinition
 
 export const expensesApi = createApi({
     reducerPath: 'expenseApi',
+    tagTypes: ['Expenses', 'Totals'],
     baseQuery: fetchBaseQuery({baseUrl: process.env.HOST}),
     endpoints: (builder) => ({
         getExpensesByUserId: builder.query<Expense[], GetByUserIdWithFilters>({
