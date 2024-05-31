@@ -2,12 +2,15 @@ import connect from "@/lib/db";
 import Expense from "@/lib/db/models/expense";
 import {NextRequest, NextResponse} from "next/server";
 import {auth} from "@clerk/nextjs/server";
+import Category from "@/lib/db/models/category";
 
 
 export async function POST(req: NextRequest) {
     const { userId } = auth();
     const {dateFrom, dateTo, categoryId, paymentMethod, title} = await req.json();
     const query: any = { userId: userId };
+
+    await Category.find({});
 
     // Add filters based on provided values
     if (dateFrom && dateTo) {
