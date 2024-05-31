@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import {Input} from "@/components/ui/input";
 import {Search} from "lucide-react";
+import ExpenseListMobile from "@/components/expenses/ExpensesListMobile";
 
 export default function ExpensesPage() {
     const {userId} = useAuth();
@@ -109,6 +110,8 @@ export default function ExpensesPage() {
                 <ExpenseForm data={{_id: 'null'}}/>
             </div>
             <DataTable columns={columns} data={data ?? []}/>
+        {/*    Tabla mobile*/}
+            <ExpenseListMobile data={data ?? []} />
         </div>
     )
 }

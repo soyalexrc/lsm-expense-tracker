@@ -33,7 +33,7 @@ export function DataTable<TData, TValue>({
     })
 
     return (
-        <div className={'pb-20'}>
+        <div className={'pb-20 hidden md:block'}>
                 <div className="rounded-md border">
                     <Table>
                         <TableHeader>
