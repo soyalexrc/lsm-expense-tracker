@@ -18,10 +18,11 @@ export const metadata: Metadata = {
     description: "Simplify your finances with our user-friendly expense tracker software. Track income, categorize spending, and gain valuable insights into your financial habits.",
     authors: [{ name: 'Alex Rodriguez', url: 'https://alexleonardo.dev' }],
     creator: 'Alex Rodriguez',
+    metadataBase: new URL('https://lsm-expense-tracker.xyz'),
     openGraph: {
         title: 'LSM Expense Tracker Software',
         description: "Simplify your finances with our user-friendly expense tracker software. Track income, categoriza spending, and gain valuable insights into your financial habits.",
-        url: 'https://lsm-expense-tracker.xyz',
+        url: new URL('https://lsm-expense-tracker.xyz'),
         type: 'website',
     },
     twitter: {
