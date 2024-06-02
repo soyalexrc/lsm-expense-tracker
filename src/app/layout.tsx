@@ -1,4 +1,4 @@
-import type {Metadata} from "next";
+import type {Metadata, Viewport} from "next";
 import "./globals.css";
 
 import {Inter as FontSans} from "next/font/google"
@@ -12,6 +12,12 @@ const fontSans = FontSans({
     subsets: ["latin"],
     variable: "--font-sans",
 })
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+}
 
 export const metadata: Metadata = {
     title: "LSM Expense Tracker Software",
@@ -47,22 +53,10 @@ export default function RootLayout({
                     fontSans.variable
                 )}
             >
-            {children}
-            <footer
-                className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-                <p className="text-xs text-gray-500 dark:text-gray-400">&copy; 2024 Expense Tracker. All rights
-                    reserved.</p>
-                <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-                    <Link href="/terms-of-service" className="text-xs hover:underline underline-offset-4"
-                          prefetch={false}>
-                        Terms of Service
-                    </Link>
-                    <Link href="/privacy-policy" className="text-xs hover:underline underline-offset-4"
-                          prefetch={false}>
-                        Privacy
-                    </Link>
-                </nav>
-            </footer>
+            <main>
+                {children}
+            </main>
+
             <Toaster/>
             </body>
             </html>

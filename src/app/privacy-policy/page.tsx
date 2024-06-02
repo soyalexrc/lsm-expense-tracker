@@ -5,8 +5,6 @@ import LandingLayout from "@/components/landing/LandingLayout";
 export default function Component() {
     return (
         <LandingLayout>
-            <main className="flex-1">
-
                 <section className="w-full py-12 md:py-24 lg:py-32">
                     <div className="container px-4 md:px-6">
                         <div className="space-y-4">
@@ -82,7 +80,6 @@ export default function Component() {
                 </section>
                 <WhyChooseUsSection showExtended={false}/>
                 <GetStartedSection/>
-            </main>
         </LandingLayout>
     )
 }

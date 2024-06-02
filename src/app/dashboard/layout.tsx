@@ -8,6 +8,7 @@ import Link from "next/link";
 import {SignedIn, SignedOut, SignInButton, UserButton} from "@clerk/nextjs";
 import {Provider} from "react-redux";
 import {store} from "@/lib/store";
+import {useState} from "react";
 
 
 
@@ -37,6 +38,7 @@ const links: LinkType[] = [
 
 export default function DashboardLayout({children}: Readonly<{ children: React.ReactNode }>) {
     const pathname = usePathname();
+    const [open, setOpen] = useState<boolean>(false);
 
     return (
         <Provider store={store}>
@@ -59,6 +61,7 @@ export default function DashboardLayout({children}: Readonly<{ children: React.R
                                         <Link
                                             key={link.route}
                                             href={link.route}
+                                            prefetch={true}
                                             className={`${pathname === link.route && 'bg-muted'} flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`}
                                         >
                                             {link.icon}
@@ -88,7 +91,7 @@ export default function DashboardLayout({children}: Readonly<{ children: React.R
                 </div>
                 <div className="flex flex-col">
                     <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-                        <Sheet>
+                        <Sheet open={open} onOpenChange={setOpen}>
                             <SheetTrigger asChild>
                                 <Button
                                     variant="outline"
@@ -112,6 +115,8 @@ export default function DashboardLayout({children}: Readonly<{ children: React.R
                                             <Link
                                                 key={link.route}
                                                 href={link.route}
+                                                prefetch={true}
+                                                onClick={() => setOpen(false)}
                                                 className={`${pathname === link.route && 'bg-muted'} flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary`}
                                             >
                                                 {link.icon}
