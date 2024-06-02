@@ -44,6 +44,7 @@ import {useGetAllCategoriesQuery} from "@/lib/store/services/categories";
 import {useGetUserSettingsByUserIdQuery} from "@/lib/store/services/userSettings";
 import {useAddExpenseMutation, useUpdateExpenseMutation} from "@/lib/store/services/expenses";
 import {toast} from "sonner";
+import {ScrollArea} from "@/components/ui/scroll-area";
 
 const formSchema = z.object({
     title: z.string().min(1, 'Title is required'),
@@ -168,7 +169,7 @@ export default function ExpenseForm({data, children}: Props) {
                                 <FormItem className='flex-1'>
                                     <FormLabel>Title</FormLabel>
                                     <FormControl>
-                                        <Input autoFocus={true} placeholder="Title" {...field} />
+                                        <Input placeholder="Title" {...field} />
                                     </FormControl>
                                     <FormMessage/>
                                 </FormItem>
@@ -293,7 +294,6 @@ export default function ExpenseForm({data, children}: Props) {
                                                 disabled={(date) =>
                                                     date > new Date() || date < new Date("1900-01-01")
                                                 }
-                                                initialFocus
                                             />
                                         </PopoverContent>
                                     </Popover>
@@ -329,7 +329,7 @@ export default function ExpenseForm({data, children}: Props) {
             <DrawerTrigger asChild>
                 {
                     children ? children : (
-                        <Button variant='outline' autoFocus={true} size='sm'>
+                        <Button variant='outline' size='sm'>
                             {
                                 data._id == 'null' ?
                                     <>
@@ -349,37 +349,87 @@ export default function ExpenseForm({data, children}: Props) {
                         Make changes to your profile here. Click save when you&apos;re done.
                     </DrawerDescription>
                 </DrawerHeader>
-                <>
-                    {categoriesError && (
-                        <Alert variant="destructive">
-                            <AlertCircle className="h-4 w-4"/>
-                            <AlertTitle>Error</AlertTitle>
-                            <AlertDescription>
-                                An error has ocurred while loading the categories, please try again.
-                            </AlertDescription>
-                        </Alert>
-                    )}
-                    {usError && (
-                        <Alert variant="destructive">
-                            <AlertCircle className="h-4 w-4"/>
-                            <AlertTitle>Error</AlertTitle>
-                            <AlertDescription>
-                                An error has ocurred while loading the payment methods, please try again.
-                            </AlertDescription>
-                        </Alert>
-                    )}
-                </>
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <div className="flex items-end gap-4">
+                <ScrollArea className="mt-5" >
+                    <>
+                        {categoriesError && (
+                            <Alert variant="destructive">
+                                <AlertCircle className="h-4 w-4"/>
+                                <AlertTitle>Error</AlertTitle>
+                                <AlertDescription>
+                                    An error has ocurred while loading the categories, please try again.
+                                </AlertDescription>
+                            </Alert>
+                        )}
+                        {usError && (
+                            <Alert variant="destructive">
+                                <AlertCircle className="h-4 w-4"/>
+                                <AlertTitle>Error</AlertTitle>
+                                <AlertDescription>
+                                    An error has ocurred while loading the payment methods, please try again.
+                                </AlertDescription>
+                            </Alert>
+                        )}
+                    </>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <div className="flex items-end gap-4">
+                                <FormField
+                                    control={form.control}
+                                    name="title"
+                                    render={({field}) => (
+                                        <FormItem className='flex-1'>
+                                            <FormLabel>Title</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder="Title" {...field} />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="category"
+                                    render={({field}) => (
+                                        <FormItem className='flex-1'>
+                                            <div className={'flex items-center justify-between'}>
+                                                <FormLabel>Category</FormLabel>
+                                                {/*<Button type='button' variant="outline" >*/}
+                                                {/*    <Plus className="h-4 w-4 mr-2" />*/}
+                                                {/*    New Category*/}
+                                                {/*</Button>*/}
+                                            </div>
+                                            <FormControl>
+                                                <Select disabled={categoriesLoading} onValueChange={field.onChange}
+                                                        value={field.value}>
+                                                    <SelectTrigger>
+                                                        <SelectValue placeholder="Select a category"/>
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        <SelectGroup>
+                                                            <SelectLabel>Categories</SelectLabel>
+                                                            {
+                                                                categories?.map(category => (
+                                                                    <SelectItem key={category._id}
+                                                                                value={category._id}>{category.title}</SelectItem>
+                                                                ))
+                                                            }
+                                                        </SelectGroup>
+                                                    </SelectContent>
+                                                </Select>
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
                             <FormField
                                 control={form.control}
-                                name="title"
+                                name="description"
                                 render={({field}) => (
-                                    <FormItem className='flex-1'>
-                                        <FormLabel>Title</FormLabel>
+                                    <FormItem>
+                                        <FormLabel>Description</FormLabel>
                                         <FormControl>
-                                            <Input autoFocus={true} placeholder="Title" {...field} />
+                                            <Textarea placeholder='Description' {...field} />
                                         </FormControl>
                                         <FormMessage/>
                                     </FormItem>
@@ -387,29 +437,29 @@ export default function ExpenseForm({data, children}: Props) {
                             />
                             <FormField
                                 control={form.control}
-                                name="category"
+                                name="paymentMethod"
                                 render={({field}) => (
                                     <FormItem className='flex-1'>
                                         <div className={'flex items-center justify-between'}>
-                                            <FormLabel>Category</FormLabel>
+                                            <FormLabel>Payment method</FormLabel>
                                             {/*<Button type='button' variant="outline" >*/}
                                             {/*    <Plus className="h-4 w-4 mr-2" />*/}
-                                            {/*    New Category*/}
+                                            {/*    New Payment Method*/}
                                             {/*</Button>*/}
                                         </div>
                                         <FormControl>
-                                            <Select disabled={categoriesLoading} onValueChange={field.onChange}
+                                            <Select disabled={usLoading} onValueChange={field.onChange}
                                                     value={field.value}>
                                                 <SelectTrigger>
-                                                    <SelectValue placeholder="Select a category"/>
+                                                    <SelectValue placeholder="Select a payment method"/>
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup>
-                                                        <SelectLabel>Categories</SelectLabel>
+                                                        <SelectLabel>Payment Methods by user</SelectLabel>
                                                         {
-                                                            categories?.map(category => (
-                                                                <SelectItem key={category._id}
-                                                                            value={category._id}>{category.title}</SelectItem>
+                                                            usData?.paymentMethods?.map(paymentMethod => (
+                                                                <SelectItem key={paymentMethod._id}
+                                                                            value={paymentMethod._id}>{paymentMethod.title}</SelectItem>
                                                             ))
                                                         }
                                                     </SelectGroup>
@@ -420,116 +470,68 @@ export default function ExpenseForm({data, children}: Props) {
                                     </FormItem>
                                 )}
                             />
-                        </div>
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Description</FormLabel>
-                                    <FormControl>
-                                        <Textarea placeholder='Description' {...field} />
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="paymentMethod"
-                            render={({field}) => (
-                                <FormItem className='flex-1'>
-                                    <div className={'flex items-center justify-between'}>
-                                        <FormLabel>Payment method</FormLabel>
-                                        {/*<Button type='button' variant="outline" >*/}
-                                        {/*    <Plus className="h-4 w-4 mr-2" />*/}
-                                        {/*    New Payment Method*/}
-                                        {/*</Button>*/}
-                                    </div>
-                                    <FormControl>
-                                        <Select disabled={usLoading} onValueChange={field.onChange}
-                                                value={field.value}>
-                                            <SelectTrigger>
-                                                <SelectValue placeholder="Select a payment method"/>
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    <SelectLabel>Payment Methods by user</SelectLabel>
-                                                    {
-                                                        usData?.paymentMethods?.map(paymentMethod => (
-                                                            <SelectItem key={paymentMethod._id}
-                                                                        value={paymentMethod._id}>{paymentMethod.title}</SelectItem>
-                                                        ))
-                                                    }
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage/>
-                                </FormItem>
-                            )}
-                        />
-                        <div className='flex items-end gap-4'>
-                            <FormField
-                                control={form.control}
-                                name="date"
-                                render={({field}) => (
-                                    <FormItem className='flex-1'>
-                                        <FormLabel>Date</FormLabel>
-                                        <br/>
-                                        <Popover>
-                                            <PopoverTrigger asChild>
-                                                <FormControl>
-                                                    <Button
-                                                        variant={"outline"}
-                                                        className={cn(
-                                                            "w-[240px] pl-3 text-left font-normal",
-                                                            !field.value && "text-muted-foreground"
-                                                        )}
-                                                    >
-                                                        {field.value ? (
-                                                            format(field.value, "PPP")
-                                                        ) : (
-                                                            <span>Pick a date</span>
-                                                        )}
-                                                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50"/>
-                                                    </Button>
-                                                </FormControl>
-                                            </PopoverTrigger>
-                                            <PopoverContent className="w-auto p-0" align="start">
-                                                <Calendar
-                                                    mode="single"
-                                                    selected={field.value}
-                                                    onSelect={field.onChange}
-                                                    disabled={(date) =>
-                                                        date > new Date() || date < new Date("1900-01-01")
-                                                    }
-                                                    initialFocus
-                                                />
-                                            </PopoverContent>
-                                        </Popover>
-                                        <FormMessage/>
-                                    </FormItem>
-                                )}
-                            />
+                            <div className='flex items-end gap-4'>
+                                <FormField
+                                    control={form.control}
+                                    name="date"
+                                    render={({field}) => (
+                                        <FormItem className='flex-1'>
+                                            <FormLabel>Date</FormLabel>
+                                            <br/>
+                                            <Popover>
+                                                <PopoverTrigger asChild>
+                                                    <FormControl>
+                                                        <Button
+                                                            variant={"outline"}
+                                                            className={cn(
+                                                                "w-[240px] pl-3 text-left font-normal",
+                                                                !field.value && "text-muted-foreground"
+                                                            )}
+                                                        >
+                                                            {field.value ? (
+                                                                format(field.value, "PPP")
+                                                            ) : (
+                                                                <span>Pick a date</span>
+                                                            )}
+                                                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50"/>
+                                                        </Button>
+                                                    </FormControl>
+                                                </PopoverTrigger>
+                                                <PopoverContent className="w-auto p-0" align="start">
+                                                    <Calendar
+                                                        mode="single"
+                                                        selected={field.value}
+                                                        onSelect={field.onChange}
+                                                        disabled={(date) =>
+                                                            date > new Date() || date < new Date("1900-01-01")
+                                                        }
+                                                        initialFocus
+                                                    />
+                                                </PopoverContent>
+                                            </Popover>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
 
-                            <FormField
-                                control={form.control}
-                                name="amount"
-                                render={({field}) => (
-                                    <FormItem className='flex-1'>
-                                        <FormLabel>Amount</FormLabel>
-                                        <FormControl>
-                                            <Input {...field} />
-                                        </FormControl>
-                                        <FormMessage/>
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-                        <Button className='w-full' type="submit">Submit</Button>
-                    </form>
-                </Form>
+                                <FormField
+                                    control={form.control}
+                                    name="amount"
+                                    render={({field}) => (
+                                        <FormItem className='flex-1'>
+                                            <FormLabel>Amount</FormLabel>
+                                            <FormControl>
+                                                <Input {...field} />
+                                            </FormControl>
+                                            <FormMessage/>
+                                        </FormItem>
+                                    )}
+                                />
+                            </div>
+                            <Button className='w-full' type="submit">Submit</Button>
+                        </form>
+                    </Form>
+                </ScrollArea>
             </DrawerContent>
         </Drawer>
     )
