@@ -265,7 +265,7 @@ export default function ExpenseForm({data, children}: Props) {
                                         <FormItem className='flex-1'>
                                             <FormLabel>Date</FormLabel>
                                             <br/>
-                                            <Popover>
+                                            <Popover modal={true}>
                                                 <PopoverTrigger asChild>
                                                     <FormControl>
                                                         <Button
@@ -475,7 +475,7 @@ export default function ExpenseForm({data, children}: Props) {
                                     <FormItem className='flex-1'>
                                         <FormLabel>Date</FormLabel>
                                         <br/>
-                                        <Popover>
+                                        <Popover modal={true}>
                                             <PopoverTrigger asChild>
                                                 <FormControl>
                                                     <Button
@@ -502,7 +502,6 @@ export default function ExpenseForm({data, children}: Props) {
                                                     disabled={(date) =>
                                                         date > new Date() || date < new Date("1900-01-01")
                                                     }
-                                                    initialFocus
                                                 />
                                             </PopoverContent>
                                         </Popover>
