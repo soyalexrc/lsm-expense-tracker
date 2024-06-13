@@ -10,6 +10,7 @@ export async function POST(req: NextRequest) {
     const query: any = { userId: userId };
 
     await connect();
+    await Category.find({})
 
     // Add filters based on provided values
     if (dateFrom && dateTo) {
