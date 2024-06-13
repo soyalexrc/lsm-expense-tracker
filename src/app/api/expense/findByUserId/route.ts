@@ -6,11 +6,10 @@ import Category from "@/lib/db/models/category";
 
 
 export async function POST(req: NextRequest) {
-    const { userId } = auth();
-    const {dateFrom, dateTo, categoryId, paymentMethod, title} = await req.json();
+    const {dateFrom, dateTo, categoryId, paymentMethod, title, userId} = await req.json();
     const query: any = { userId: userId };
 
-    await Category.find({});
+    await connect();
 
     // Add filters based on provided values
     if (dateFrom && dateTo) {

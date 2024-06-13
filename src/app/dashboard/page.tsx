@@ -12,9 +12,9 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-import DateBasedChart from "@/components/expenses/DateBasedChart";
-import CategoriesChart from "@/components/expenses/CategoriesChart";
-import PaymentMethodsChart from "@/components/expenses/PaymentMethodsChart";
+import DateBasedChart from "@/components/expenses/charts/DateBasedChart";
+import CategoriesChart from "@/components/expenses/charts/CategoriesChart";
+import PaymentMethodsChart from "@/components/expenses/charts/PaymentMethodsChart";
 import useSize from "@/lib/hooks/useSize";
 import {useGetTotalsQuery} from "@/lib/store/services/expenses";
 
