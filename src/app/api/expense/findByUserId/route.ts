@@ -6,7 +6,8 @@ import Category from "@/lib/db/models/category";
 
 
 export async function POST(req: NextRequest) {
-    const {dateFrom, dateTo, categoryId, paymentMethod, title, userId} = await req.json();
+    const { userId } = auth();
+    const {dateFrom, dateTo, categoryId, paymentMethod, title} = await req.json();
     const query: any = { userId: userId };
 
     await connect();
@@ -31,7 +32,9 @@ export async function POST(req: NextRequest) {
             .find(query)
             .sort({ date: -1 })
             .populate('category');
-        return  NextResponse.json(data)
+        return  NextResponse.json(data, {
+            status: 200,
+        })
     } catch (err) {
         console.log(err);
     }
