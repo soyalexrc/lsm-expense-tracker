@@ -49,9 +49,8 @@ export default async function ExpensesDataTable() {
 
     return (
         <>
-            <p>hello</p>
-            {/*<DataTable columns={columns} data={data ?? []}/>*/}
-            {/*<ExpenseListMobile data={data ?? []}/>*/}
+            <DataTable columns={columns} data={data ?? []}/>
+            <ExpenseListMobile data={data ?? []}/>
         </>
     )
 }
