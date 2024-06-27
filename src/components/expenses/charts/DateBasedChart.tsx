@@ -1,3 +1,4 @@
+'use client';
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Rectangle} from 'recharts';
 import {TotalAmountByDay} from "@/lib/interfaces/expense";
 

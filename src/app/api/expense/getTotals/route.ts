@@ -4,29 +4,33 @@ import {NextRequest, NextResponse} from "next/server";
 import {auth} from "@clerk/nextjs/server";
 import UserSettings from "@/lib/db/models/user-settings";
 
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
-    const { userId } = auth();
-    const {dateFrom, dateTo} = await req.json();
+    const  {dateFrom, dateTo, userId} = await req.json();
 
-    const match =
-        dateFrom && dateTo
-            ? {
-                $match: {
-                    userId,
-                    date: {
-                        $gte: new Date(dateFrom),
-                        $lte: new Date(dateTo),
-                    },
-                },
-            }
-            : {
-                $match: {
-                    userId,
-                },
-            };
 
     try {
+        if (!dateFrom || !dateTo) throw new Error("date range is required");
+        const match =
+            dateFrom && dateTo
+                ? {
+                    $match: {
+                        userId,
+                        date: {
+                            $gte: new Date(dateFrom),
+                            $lte: new Date(dateTo),
+                        },
+                    },
+                }
+                : {
+                    $match: {
+                        userId,
+                    },
+                };
+
+        console.log(match);
+
         await connect()
         const settings = await UserSettings.findOne({ userId });
         const totalAmount = await Expense.aggregate([

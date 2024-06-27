@@ -68,7 +68,6 @@ export default function DashboardPage() {
     if (error) 'An error ocurred...'
     return (
         <div>
-            <title>LSM Expense Tracker - Dashboard</title>
             <div className="grid grid-cols-12 gap-3">
                 <Select value={year} onValueChange={(value) => onDateChange(value, 'year')}>
                     <SelectTrigger className='md:col-span-2 col-span-12'>
@@ -152,10 +151,6 @@ export default function DashboardPage() {
                         </ul>
                         <CategoriesChart
                             data={data.totalAmountByCategory}
-                            innerRadius={windowSize[0] < BREAKPOINT ? 90 : 140}
-                            outerRadius={windowSize[0] < BREAKPOINT ? 120 : 180}
-                            cx={windowSize[0] < BREAKPOINT ? 145 : 250}
-                            cy={windowSize[0] < BREAKPOINT ? 170 : 230}
                         />
                     </div>
                 }

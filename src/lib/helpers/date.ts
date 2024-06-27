@@ -77,6 +77,10 @@ export function getWeeksInMonth(year: number, month: number): WeekDateRange[] {
         }
         weekEnd = currentDay.toLocaleDateString('en-US', { day: 'numeric', month: 'numeric' });
 
+        if (weekStart !== weekEnd) {
+
+        }
+
         weeks.push({
             dateRange: {
                 from: new Date(weekStart),

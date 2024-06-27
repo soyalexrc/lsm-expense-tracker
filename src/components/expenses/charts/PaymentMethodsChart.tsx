@@ -1,3 +1,4 @@
+'use client';
 import {LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts';
 import {TotalAmountByPaymentMethod} from "@/lib/interfaces/expense";
 
